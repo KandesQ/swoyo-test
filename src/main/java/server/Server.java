@@ -12,16 +12,10 @@ import io.netty.handler.codec.serialization.ClassResolvers;
 import io.netty.handler.codec.serialization.ObjectDecoder;
 import io.netty.handler.codec.serialization.ObjectEncoder;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import java.util.Scanner;
-import java.util.concurrent.ConcurrentHashMap;
 
 public class Server {
-
-    // для сереализации/десереализации json'а
-    private static final Map<String, Map<String, Integer>> data = new ConcurrentHashMap<>();
 
     private final ServerService serverService;
 
@@ -68,7 +62,7 @@ public class Server {
                         if (cmd.equalsIgnoreCase("exit")) {
                             try {
                                 // cначала сохраняем данные
-                                serverService.save("data.json", data);
+                                serverService.save("data.json");
                                 serverService.exit(f, List.of(workerGroup, bossGroup));
                             } catch (InterruptedException e) {
                                 e.printStackTrace();
