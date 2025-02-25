@@ -15,7 +15,7 @@ public class ServerHandler extends SimpleChannelInboundHandler<TopicDto> {
      */
     @Override
     protected void channelRead0(ChannelHandlerContext ctx, TopicDto topicDto) {
-        // будет вызываться метод сервиса update для доавбления/изменения топика в мапе data
+        ServerService.update(topicDto);
     }
 
     @Override

@@ -63,4 +63,14 @@ public class Vote {
     public int hashCode() {
         return Objects.hash(name, voteDescription, optionAmount, options);
     }
+
+    @Override
+    public String toString() {
+        return "Vote{" +
+                "name='" + name + '\'' +
+                ", voteDescription='" + voteDescription + '\'' +
+                ", optionAmount=" + optionAmount +
+                ", options=" + options +
+                '}';
+    }
 }
