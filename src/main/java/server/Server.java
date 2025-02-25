@@ -20,14 +20,14 @@ import java.util.concurrent.ConcurrentHashMap;
 
 public class Server {
 
+    // для сереализации/десереализации json'а
+    private static final Map<String, Map<String, Integer>> data = new ConcurrentHashMap<>();
+
     private final ServerService serverService;
 
     public Server(ServerService serverService) {
         this.serverService = serverService;
     }
-
-    // для сереализации/десереализации json'а
-    private static final Map<String, Map<String, Integer>> data = new ConcurrentHashMap<>();
 
     public void run(int port) throws InterruptedException {
         EventLoopGroup bossGroup = new NioEventLoopGroup();
@@ -67,6 +67,8 @@ public class Server {
                         String cmd = scanner.nextLine();
                         if (cmd.equalsIgnoreCase("exit")) {
                             try {
+                                // cначала сохраняем данные
+                                serverService.save("data.json", data);
                                 serverService.exit(f, List.of(workerGroup, bossGroup));
                             } catch (InterruptedException e) {
                                 e.printStackTrace();
