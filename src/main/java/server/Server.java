@@ -15,9 +15,16 @@ import io.netty.handler.codec.serialization.ObjectEncoder;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Scanner;
 import java.util.concurrent.ConcurrentHashMap;
 
 public class Server {
+
+    private final ServerService serverService;
+
+    public Server(ServerService serverService) {
+        this.serverService = serverService;
+    }
 
     // для сереализации/десереализации json'а
     private static final Map<String, Map<String, Integer>> data = new ConcurrentHashMap<>();
@@ -53,6 +60,24 @@ public class Server {
             ChannelFuture f = b.bind(port).sync();
             System.out.println("Server is started on port: " + port);
 
+            // создаю поток, потому что сервер блокируется для ожидания закрытия канала
+            new Thread(() -> {
+                try (Scanner scanner = new Scanner(System.in);) {
+                    while (true) {
+                        String cmd = scanner.nextLine();
+                        if (cmd.equalsIgnoreCase("exit")) {
+                            try {
+                                serverService.exit(f, List.of(workerGroup, bossGroup));
+                            } catch (InterruptedException e) {
+                                e.printStackTrace();
+                            }
+                            break;
+                        }
+                    }
+                }
+            }).start();
+
+            // вот тут
             f.channel().closeFuture().sync();
         } finally {
             workerGroup.shutdownGracefully();
@@ -64,8 +89,9 @@ public class Server {
 
     public static void main(String[] args) throws InterruptedException {
         int port = 8080;
+        // возможно указать кастомный порт в аргументах
         if (args.length > 0) port = Integer.parseInt(args[0]);
 
-        new Server().run(port);
+        new Server(new ServerService()).run(port);
     }
 }

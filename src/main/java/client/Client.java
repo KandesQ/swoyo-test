@@ -17,6 +17,13 @@ import model.Topic;
 import java.util.Scanner;
 
 public class Client {
+
+    private final ClientService clientService;
+
+    public Client(ClientService clientService) {
+        this.clientService = clientService;
+    }
+
     public void run(String host, int port) throws InterruptedException {
         EventLoopGroup workerGroup = new NioEventLoopGroup();
 
@@ -41,17 +48,15 @@ public class Client {
             Channel channel = f.channel();
 
             // логика ввода пользователем команд
-            Scanner scanner = new Scanner(System.in);
+            try (Scanner scanner = new Scanner(System.in);) {
+                while (true) {
+                    String cmd = scanner.nextLine();
 
-            Topic topic = new Topic("topic");
-            int i = 0;
-
-            while (true) {
-                String str = scanner.nextLine();
-                if (str.equalsIgnoreCase("exit")) break;
-
-                topic.setName(topic.getName() + " " + i++);
-                channel.writeAndFlush(topic);
+                    if (cmd.equalsIgnoreCase("exit")) {
+                        clientService.exit(channel, workerGroup);
+                        break;
+                    }
+                }
             }
 
             f.channel().closeFuture().sync();
@@ -65,6 +70,6 @@ public class Client {
         String host = args[0];
         int port = Integer.parseInt(args[1]);
 
-        new Client().run(host, port);
+        new Client(new ClientService()).run(host, port);
     }
 }
