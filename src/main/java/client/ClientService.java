@@ -5,6 +5,7 @@ import io.netty.channel.EventLoopGroup;
 
 public class ClientService {
 
+    // все crud методы должны отправлять dto, а с помощью equals() hashCode() будет изменяться data в ServerService
 
     public void exit(Channel channel, EventLoopGroup group) throws InterruptedException {
         try {
@@ -19,7 +20,7 @@ public class ClientService {
 
             System.out.println("Client connection closed");
         } catch (InterruptedException e) {
-            e.printStackTrace(); // logs
+            System.out.println("Couldn't close connection: " + e.getMessage());
         }
     }
 

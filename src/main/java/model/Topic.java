@@ -1,15 +1,15 @@
 package model;
 
 
-import java.io.Serializable;
 import java.util.List;
-import java.util.concurrent.ConcurrentHashMap;
+import java.util.Objects;
 
-public class Topic implements Serializable {
-    private static final long serialVersionUID = 1L;
+public class Topic {
 
     private String name;
     private List<Vote> votes;
+
+    public Topic() {}
 
     public Topic(String name) {
         this.name = name;
@@ -29,6 +29,18 @@ public class Topic implements Serializable {
 
     public void setVotes(List<Vote> votes) {
         this.votes = votes;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) return false;
+        Topic topic = (Topic) o;
+        return Objects.equals(name, topic.name) && Objects.equals(votes, topic.votes);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name, votes);
     }
 
     @Override

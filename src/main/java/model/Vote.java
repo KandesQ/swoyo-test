@@ -1,6 +1,7 @@
 package model;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 public class Vote {
@@ -9,10 +10,14 @@ public class Vote {
     private int optionAmount;
     List<String> options; // immutable list
 
+    // для Dto
+    public Vote() {}
+
     public Vote(String name, String voteDescription, List<String> options) {
         this.name = name;
         this.voteDescription = voteDescription;
         this.options = List.copyOf(options);
+        this.optionAmount = this.options.size();
     }
 
     public String getName() {
@@ -45,5 +50,17 @@ public class Vote {
 
     public void setOptions(List<String> options) {
         this.options = options;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) return false;
+        Vote vote = (Vote) o;
+        return optionAmount == vote.optionAmount && Objects.equals(name, vote.name) && Objects.equals(voteDescription, vote.voteDescription) && Objects.equals(options, vote.options);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name, voteDescription, optionAmount, options);
     }
 }

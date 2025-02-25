@@ -1,20 +1,21 @@
 package server;
 
+import dto.TopicDto;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
 import model.Topic;
 
-import java.sql.SQLOutput;
-
 /**
  * Обрабатывает запросы на изменение топика от клиента
  */
-public class ServerHandler extends SimpleChannelInboundHandler<Topic> {
+public class ServerHandler extends SimpleChannelInboundHandler<TopicDto> {
 
+    /**
+     * Принимает топик, который добавить/удалить/изменить в data
+     */
     @Override
-    protected void channelRead0(ChannelHandlerContext ctx, Topic topic) {
-        System.out.println("Received object from client: " + topic);
-        ctx.writeAndFlush(topic + " is received");
+    protected void channelRead0(ChannelHandlerContext ctx, TopicDto topicDto) {
+        // будет вызываться метод сервиса update для доавбления/изменения топика в мапе data
     }
 
     @Override
