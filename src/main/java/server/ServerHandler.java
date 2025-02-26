@@ -1,5 +1,6 @@
 package server;
 
+import client.ClientService;
 import dto.TopicDto;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
@@ -10,17 +11,24 @@ import model.Topic;
  */
 public class ServerHandler extends SimpleChannelInboundHandler<TopicDto> {
 
+    private final ServerService serverService;
+
+    public ServerHandler(ServerService serverService) {
+        this.serverService = serverService;
+    }
+
     /**
      * Принимает топик, который добавить/удалить/изменить в data
      */
     @Override
     protected void channelRead0(ChannelHandlerContext ctx, TopicDto topicDto) {
-        ServerService.update(topicDto);
+        System.out.println("Request: " + topicDto);
+        serverService.resolveAndFlush(ctx, topicDto);
     }
 
     @Override
     public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) {
-        System.out.println("An error occured: " + cause.getMessage());
+        System.out.println("An error occurred: " + cause.getMessage());
         cause.printStackTrace();
         ctx.close();
     }

@@ -29,7 +29,7 @@ public class VoteDto implements Serializable {
 
         voteDto.setName(vote.getName());
         voteDto.setOptions(vote.getOptions());
-        voteDto.setOptionAmount(voteDto.getOptionAmount());
+        voteDto.setOptionAmount(vote.getOptionAmount());
         voteDto.setVoteDescription(vote.getVoteDescription());
 
         return voteDto;

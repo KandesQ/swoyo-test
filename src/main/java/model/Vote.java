@@ -13,6 +13,13 @@ public class Vote {
     // для Dto
     public Vote() {}
 
+    public Vote(String name, String voteDescription, int optionAmount, List<String> options) {
+        this.name = name;
+        this.voteDescription = voteDescription;
+        this.optionAmount = optionAmount;
+        this.options = options;
+    }
+
     public Vote(String name, String voteDescription, List<String> options) {
         this.name = name;
         this.voteDescription = voteDescription;

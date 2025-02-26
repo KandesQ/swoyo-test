@@ -6,15 +6,15 @@ import picocli.CommandLine.*;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Optional;
 
 public class CommandResolver {
-    private final Map<String, CommandLine> commands = new HashMap<>();
+    private static final Map<String, Runnable> commands = new HashMap<>();
 
     {
-        commands.put(getCommandName(ExitCommand.class), new CommandLine(new ExitCommand()));
-        commands.put(getCommandName(LoginCommand.class), new CommandLine(new LoginCommand()));
-        commands.put(getCommandName(DefaultCommand.class), new CommandLine(new DefaultCommand()));
+        commands.put(getCommandName(ExitCommand.class), new ExitCommand());
+        commands.put(getCommandName(LoginCommand.class), new LoginCommand());
+        commands.put(getCommandName(DefaultCommand.class), new DefaultCommand());
+        commands.put(getCommandName(ViewCommand.class), new ViewCommand());
     }
 
     /**
@@ -30,10 +30,18 @@ public class CommandResolver {
         return "default";
     }
 
-    public CommandLine getCommand(String cmd) {
+    public static CommandLine getCommandLine(String cmd) {
+        if (commands.containsKey(cmd)) {
+            return new CommandLine(commands.get(cmd));
+        }
+        return new CommandLine(commands.get("default")); // если пользователь ввел несуществующую команду
+    }
+
+    public static Runnable getCommand(String cmd) {
         if (commands.containsKey(cmd)) {
             return commands.get(cmd);
         }
-        return commands.get("default"); // если пользователь ввел несуществующую команду
+
+        return commands.get("default");
     }
 }

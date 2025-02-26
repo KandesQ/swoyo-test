@@ -44,7 +44,7 @@ public class Server {
                                     new ObjectEncoder()
                             );
                             socketChannel.pipeline().addLast(
-                                    new ServerHandler()
+                                    new ServerHandler(serverService)
                             );
                         }
                     })

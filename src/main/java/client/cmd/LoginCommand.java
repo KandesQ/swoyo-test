@@ -10,11 +10,8 @@ import java.util.concurrent.Callable;
 @Command(name = "login", description = "user Authorization")
 public class LoginCommand implements Runnable {
 
-    @Option(names = {"-u", "--username"}, description = "username", required = true)
+    @Option(names = {"-u"}, description = "username", required = true)
     private String username;
-
-    // пустой конструктор для рефлексии по пакету
-    public LoginCommand() {}
 
     @Override
     public void run() {

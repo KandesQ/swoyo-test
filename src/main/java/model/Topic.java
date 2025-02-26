@@ -45,9 +45,12 @@ public class Topic {
 
     @Override
     public String toString() {
-        return "Topic{" +
-                "name='" + name + '\'' +
-                ", votes=" + votes +
-                '}';
+        StringBuilder s = new StringBuilder(name + " (");
+
+        for (var vote: votes) {
+            s.append(vote.getName()).append("=").append(vote.getOptionAmount()).append(" ");
+        }
+
+        return s.append(")").toString();
     }
 }

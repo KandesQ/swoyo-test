@@ -11,6 +11,7 @@ public class TopicDto implements Serializable {
 
     private String name;
     private List<VoteDto> voteDtos;
+    private String callingCmd;
 
     public static Topic DtoToModel(TopicDto topicDto) {
         Topic topic = new Topic();
@@ -26,7 +27,7 @@ public class TopicDto implements Serializable {
     public static TopicDto ModelToDto(Topic topic) {
         TopicDto topicDto = new TopicDto();
 
-        topicDto.setName(topicDto.getName());
+        topicDto.setName(topic.getName());
         topicDto.setVoteDtos(topic.getVotes().stream()
                 .map(VoteDto::ModelToDto)
                 .toList());
@@ -49,4 +50,14 @@ public class TopicDto implements Serializable {
     public void setVoteDtos(List<VoteDto> voteDtos) {
         this.voteDtos = voteDtos;
     }
+
+    public String getCallingCmd() {
+        return callingCmd;
+    }
+
+    public void setCallingCmd(String callingCmd) {
+        this.callingCmd = callingCmd;
+    }
+
+
 }

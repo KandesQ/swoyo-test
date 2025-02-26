@@ -1,6 +1,5 @@
 package client;
 
-import client.cmd.LoginCommand;
 import io.netty.bootstrap.Bootstrap;
 import io.netty.channel.*;
 import io.netty.channel.nio.NioEventLoopGroup;
@@ -18,6 +17,7 @@ public class Client {
 
     private final ClientService clientService;
     private final CommandResolver commandResolver;
+    public static final ClientHandler clientHandler = new ClientHandler();
 
     public static final EventLoopGroup workerGroup = new NioEventLoopGroup();
     public static Channel channel;
@@ -36,10 +36,10 @@ public class Client {
                     .channel(NioSocketChannel.class)
                     .handler(new ChannelInitializer<SocketChannel>() {
                         @Override
-                        protected void initChannel(SocketChannel socketChannel) throws Exception {
+                        protected void initChannel(SocketChannel socketChannel) {
                             socketChannel.pipeline().addLast(new ObjectDecoder(ClassResolvers.cacheDisabled(null)));
                             socketChannel.pipeline().addLast(new ObjectEncoder());
-                            socketChannel.pipeline().addLast(new ClientHandler());
+                            socketChannel.pipeline().addLast(clientHandler);
                         }
                     })
                     .option(ChannelOption.SO_KEEPALIVE, true);
@@ -56,16 +56,16 @@ public class Client {
                 String[] parsedCmd;
                 String[] cmdArgs;
 
-                do {
-                    System.out.println("Before using app, please, log in:");
-
-                    parsedCmd = scanner.nextLine().split(" ");
-                    cmdArgs = Arrays.copyOfRange(parsedCmd, 1, parsedCmd.length);
-
-                    if (parsedCmd[0].equalsIgnoreCase(CommandResolver.getCommandName(LoginCommand.class))) {
-                        commandResolver.getCommand(CommandResolver.getCommandName(LoginCommand.class)).execute(cmdArgs);
-                    }
-                } while (username == null);
+//                do {
+//                    System.out.println("Before using app, please, log in:");
+//
+//                    parsedCmd = scanner.nextLine().split(" ");
+//                    cmdArgs = Arrays.copyOfRange(parsedCmd, 1, parsedCmd.length);
+//
+//                    if (parsedCmd[0].equalsIgnoreCase(CommandResolver.getCommandName(LoginCommand.class))) {
+//                        commandResolver.getCommand(CommandResolver.getCommandName(LoginCommand.class)).execute(cmdArgs);
+//                    }
+//                } while (username == null);
 
                 while (true) {
                     System.out.print(">>> ");
@@ -77,10 +77,10 @@ public class Client {
                         // еще подумать над этим ифом, можно ли как нибудь сделать необязательне аргументы (пригодится для команд типа view)
                         // для команд без аргументов
                         if (parsedCmd.length == 1) {
-                            commandResolver.getCommand(parsedCmd[0]).execute();
+                            commandResolver.getCommandLine(parsedCmd[0]).execute();
                         } else {
-                            // с аргументами
-                            commandResolver.getCommand(parsedCmd[0]).execute(cmdArgs);
+                            // если аргументов нет, то picocli не будет ругаться, если они необязательны
+                            commandResolver.getCommandLine(parsedCmd[0]).execute(cmdArgs);
                         }
 
                         if (parsedCmd[0].equalsIgnoreCase("exit")) break;
