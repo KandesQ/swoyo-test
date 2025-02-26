@@ -52,11 +52,15 @@ public class Client {
 
             // логика ввода пользователем команд
             try (Scanner scanner = new Scanner(System.in);) {
+
+                String[] parsedCmd;
+                String[] cmdArgs;
+
                 do {
                     System.out.println("Before using app, please, log in:");
 
-                    String[] parsedCmd = scanner.nextLine().split(" ");
-                    String[] cmdArgs = Arrays.copyOfRange(parsedCmd, 1, parsedCmd.length);
+                    parsedCmd = scanner.nextLine().split(" ");
+                    cmdArgs = Arrays.copyOfRange(parsedCmd, 1, parsedCmd.length);
 
                     if (parsedCmd[0].equalsIgnoreCase(CommandResolver.getCommandName(LoginCommand.class))) {
                         commandResolver.getCommand(CommandResolver.getCommandName(LoginCommand.class)).execute(cmdArgs);
@@ -66,16 +70,17 @@ public class Client {
                 while (true) {
                     System.out.print(">>> ");
 
-                    String[] parsedCmd = scanner.nextLine().split(" ");
+                    parsedCmd = scanner.nextLine().split(" ");
+                    cmdArgs = Arrays.copyOfRange(parsedCmd, 1, parsedCmd.length);
 
                     try {
-
+                        // еще подумать над этим ифом, можно ли как нибудь сделать необязательне аргументы (пригодится для команд типа view)
                         // для команд без аргументов
                         if (parsedCmd.length == 1) {
                             commandResolver.getCommand(parsedCmd[0]).execute();
                         } else {
                             // с аргументами
-                            commandResolver.getCommand(parsedCmd[0]).execute(parsedCmd);
+                            commandResolver.getCommand(parsedCmd[0]).execute(cmdArgs);
                         }
 
                         if (parsedCmd[0].equalsIgnoreCase("exit")) break;

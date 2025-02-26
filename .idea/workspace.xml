@@ -4,10 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="805140ed-d048-4aa7-a355-7b30214c672f" name="Changes" comment="add exit command">
+    <list default="true" id="805140ed-d048-4aa7-a355-7b30214c672f" name="Changes" comment="add login command">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/client/Client.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/client/Client.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/client/cmd/LoginCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/client/cmd/LoginCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/client/cmd/DefaultCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/client/cmd/DefaultCommand.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/util/CommandResolver.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/util/CommandResolver.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -140,7 +140,7 @@
       <workItem from="1740500417151" duration="29000" />
       <workItem from="1740501881630" duration="57000" />
       <workItem from="1740502978848" duration="7387000" />
-      <workItem from="1740550409953" duration="6987000" />
+      <workItem from="1740550409953" duration="8654000" />
     </task>
     <task id="LOCAL-00001" summary="init">
       <option name="closed" value="true" />
@@ -230,7 +230,15 @@
       <option name="project" value="LOCAL" />
       <updated>1740575999851</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="add login command">
+      <option name="closed" value="true" />
+      <created>1740576796854</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1740576796854</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -259,6 +267,7 @@
     <MESSAGE value="add update()" />
     <MESSAGE value="update README.md" />
     <MESSAGE value="add exit command" />
-    <option name="LAST_COMMIT_MESSAGE" value="add exit command" />
+    <MESSAGE value="add login command" />
+    <option name="LAST_COMMIT_MESSAGE" value="add login command" />
   </component>
 </project>
