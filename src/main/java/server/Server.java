@@ -61,8 +61,6 @@ public class Server {
                         String cmd = scanner.nextLine();
                         if (cmd.equalsIgnoreCase("exit")) {
                             try {
-                                // cначала сохраняем данные
-                                serverService.save("data.json");
                                 serverService.exit(f, List.of(workerGroup, bossGroup));
                             } catch (InterruptedException e) {
                                 e.printStackTrace();

@@ -1,4 +1,3 @@
 package client.cmd;
 
-public class DeleteCommand {
-}
+public class DeleteCommand {}
