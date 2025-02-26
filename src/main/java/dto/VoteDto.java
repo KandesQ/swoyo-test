@@ -2,9 +2,12 @@ package dto;
 
 import model.Vote;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class VoteDto {
+public class VoteDto implements Serializable {
+    private static final long serialVersionUID = 1L;
+
     private String name;
     private String voteDescription;
     private int optionAmount;

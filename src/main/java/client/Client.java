@@ -1,32 +1,34 @@
 package client;
 
+import client.cmd.LoginCommand;
 import io.netty.bootstrap.Bootstrap;
 import io.netty.channel.*;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioSocketChannel;
-import io.netty.handler.codec.DelimiterBasedFrameDecoder;
-import io.netty.handler.codec.Delimiters;
 import io.netty.handler.codec.serialization.ClassResolvers;
 import io.netty.handler.codec.serialization.ObjectDecoder;
 import io.netty.handler.codec.serialization.ObjectEncoder;
-import io.netty.handler.codec.string.StringDecoder;
-import io.netty.handler.codec.string.StringEncoder;
-import model.Topic;
+import util.CommandResolver;
 
 import java.util.Scanner;
 
 public class Client {
 
     private final ClientService clientService;
+    private final CommandResolver commandResolver;
 
-    public Client(ClientService clientService) {
+    public static final EventLoopGroup workerGroup = new NioEventLoopGroup();
+    public static Channel channel;
+
+    private String username;
+
+    public Client(ClientService clientService, CommandResolver commandResolver) {
         this.clientService = clientService;
+        this.commandResolver = commandResolver;
     }
 
     public void run(String host, int port) throws InterruptedException {
-        EventLoopGroup workerGroup = new NioEventLoopGroup();
-
         try {
             Bootstrap b = new Bootstrap();
             b.group(workerGroup)
@@ -45,21 +47,39 @@ public class Client {
             ChannelFuture f = b.connect(host, port).sync();
             System.out.println("Connected to server");
 
-            Channel channel = f.channel();
+            channel = f.channel();
 
             // логика ввода пользователем команд
             try (Scanner scanner = new Scanner(System.in);) {
-                while (true) {
-                    String cmd = scanner.nextLine();
+//                do {
+//                    System.out.println("Before using app, please, log in");
+//                    String[] parsedCmd = scanner.nextLine().split(" ");
+//                    commandResolver.getCommand(CommandResolver.getCommandName(LoginCommand.class)).execute(parsedCmd);
+//                } while (username == null);
 
-                    if (cmd.equalsIgnoreCase("exit")) {
-                        clientService.exit(channel, workerGroup);
-                        break;
+                while (true) {
+                    System.out.print(">>> ");
+
+                    String[] parsedCmd = scanner.nextLine().split(" ");
+
+                    try {
+
+                        // для команд без аргументов
+                        if (parsedCmd.length == 1) {
+                            commandResolver.getCommand(parsedCmd[0]).execute();
+                        } else {
+                            // с аргументами
+                            commandResolver.getCommand(parsedCmd[0]).execute(parsedCmd);
+                        }
+
+                        if (parsedCmd[0].equalsIgnoreCase("exit")) break;
+                    } catch (Exception e) {
+                        System.out.println("Error while executing " + parsedCmd[0] + " occured: " + e.getMessage());
                     }
                 }
             }
 
-            f.channel().closeFuture().sync();
+            channel.closeFuture().sync();
         } finally {
             workerGroup.shutdownGracefully();
         }
@@ -70,6 +90,6 @@ public class Client {
         String host = args[0];
         int port = Integer.parseInt(args[1]);
 
-        new Client(new ClientService()).run(host, port);
+        new Client(new ClientService(), new CommandResolver()).run(host, port);
     }
 }
