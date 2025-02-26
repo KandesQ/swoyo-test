@@ -57,6 +57,7 @@ public class ServerService {
                     System.out.println("topic " + topicDto.getName() + " doesn't exist");
                 } else {
                     response = TopicDto.ModelToDto(topics.get(topicDto.getName()));
+                    System.out.println("Topic" + response.getName() + " sent");
                 }
                 break;
             default:

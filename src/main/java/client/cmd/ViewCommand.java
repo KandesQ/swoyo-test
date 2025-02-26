@@ -13,11 +13,11 @@ import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 
 /**
- * будет запрашивать data и считывать канал на их наличие
+ * Запрашивает топик. Не знаю как реализовать чтобы возвращало много топиков, поэтому -t параметр - обязательный
  */
 @CommandLine.Command(name = "view", description = "показывает запрошенные данные")
 public class ViewCommand implements Runnable {
-    @CommandLine.Option(names = {"-t"})
+    @CommandLine.Option(names = {"-t"}, required = true)
     private String topicName;
 
     @Override
@@ -38,7 +38,7 @@ public class ViewCommand implements Runnable {
                 topicDto = topicDtoOpt.get();
 
                 Topic topic = TopicDto.DtoToModel(topicDto);
-//                System.out.println(topic.getName() + "(");
+                System.out.println(topic);
             } else {
                 System.out.println("Response time is up");
             }
