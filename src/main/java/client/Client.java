@@ -11,6 +11,7 @@ import io.netty.handler.codec.serialization.ObjectDecoder;
 import io.netty.handler.codec.serialization.ObjectEncoder;
 import util.CommandResolver;
 
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class Client {
@@ -21,7 +22,7 @@ public class Client {
     public static final EventLoopGroup workerGroup = new NioEventLoopGroup();
     public static Channel channel;
 
-    private String username;
+    public static String username;
 
     public Client(ClientService clientService, CommandResolver commandResolver) {
         this.clientService = clientService;
@@ -51,11 +52,16 @@ public class Client {
 
             // логика ввода пользователем команд
             try (Scanner scanner = new Scanner(System.in);) {
-//                do {
-//                    System.out.println("Before using app, please, log in");
-//                    String[] parsedCmd = scanner.nextLine().split(" ");
-//                    commandResolver.getCommand(CommandResolver.getCommandName(LoginCommand.class)).execute(parsedCmd);
-//                } while (username == null);
+                do {
+                    System.out.println("Before using app, please, log in:");
+
+                    String[] parsedCmd = scanner.nextLine().split(" ");
+                    String[] cmdArgs = Arrays.copyOfRange(parsedCmd, 1, parsedCmd.length);
+
+                    if (parsedCmd[0].equalsIgnoreCase(CommandResolver.getCommandName(LoginCommand.class))) {
+                        commandResolver.getCommand(CommandResolver.getCommandName(LoginCommand.class)).execute(cmdArgs);
+                    }
+                } while (username == null);
 
                 while (true) {
                     System.out.print(">>> ");

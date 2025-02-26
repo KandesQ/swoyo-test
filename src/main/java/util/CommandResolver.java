@@ -13,6 +13,7 @@ public class CommandResolver {
 
     {
         commands.put(getCommandName(ExitCommand.class), new CommandLine(new ExitCommand()));
+        commands.put(getCommandName(LoginCommand.class), new CommandLine(new LoginCommand()));
     }
 
     /**
