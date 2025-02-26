@@ -4,19 +4,21 @@ import model.Topic;
 
 import java.io.Serializable;
 import java.util.List;
-import java.util.stream.Stream;
 
 public class TopicDto implements Serializable {
     private static final long serialVersionUID = 1L;
 
-    private String name;
+    private String topicName;
+    private String voteName;
+
     private List<VoteDto> voteDtos;
+
     private String callingCmd;
 
     public static Topic DtoToModel(TopicDto topicDto) {
         Topic topic = new Topic();
 
-        topic.setName(topicDto.getName());
+        topic.setName(topicDto.getTopicName());
         topic.setVotes(topicDto.getVoteDtos().stream()
                 .map(VoteDto::DtoToModel)
                 .toList());
@@ -27,7 +29,7 @@ public class TopicDto implements Serializable {
     public static TopicDto ModelToDto(Topic topic) {
         TopicDto topicDto = new TopicDto();
 
-        topicDto.setName(topic.getName());
+        topicDto.setTopicName(topic.getName());
         topicDto.setVoteDtos(topic.getVotes().stream()
                 .map(VoteDto::ModelToDto)
                 .toList());
@@ -35,12 +37,12 @@ public class TopicDto implements Serializable {
         return topicDto;
     }
 
-    public String getName() {
-        return name;
+    public String getTopicName() {
+        return topicName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setTopicName(String topicName) {
+        this.topicName = topicName;
     }
 
     public List<VoteDto> getVoteDtos() {
@@ -60,4 +62,11 @@ public class TopicDto implements Serializable {
     }
 
 
+    public String getVoteName() {
+        return voteName;
+    }
+
+    public void setVoteName(String voteName) {
+        this.voteName = voteName;
+    }
 }

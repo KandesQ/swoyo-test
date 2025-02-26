@@ -4,9 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="805140ed-d048-4aa7-a355-7b30214c672f" name="Changes" comment="add view command">
+    <list default="true" id="805140ed-d048-4aa7-a355-7b30214c672f" name="Changes" comment="update view">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/client/cmd/ViewCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/client/cmd/ViewCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/dto/TopicDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dto/TopicDto.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/server/ServerService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/server/ServerService.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -139,7 +140,7 @@
       <workItem from="1740500417151" duration="29000" />
       <workItem from="1740501881630" duration="57000" />
       <workItem from="1740502978848" duration="7387000" />
-      <workItem from="1740550409953" duration="19485000" />
+      <workItem from="1740550409953" duration="21082000" />
     </task>
     <task id="LOCAL-00001" summary="init">
       <option name="closed" value="true" />
@@ -253,7 +254,15 @@
       <option name="project" value="LOCAL" />
       <updated>1740588831104</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="update view">
+      <option name="closed" value="true" />
+      <created>1740589547591</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1740589547591</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -285,7 +294,8 @@
     <MESSAGE value="add login command" />
     <MESSAGE value="add default command" />
     <MESSAGE value="add view command" />
-    <option name="LAST_COMMIT_MESSAGE" value="add view command" />
+    <MESSAGE value="update view" />
+    <option name="LAST_COMMIT_MESSAGE" value="update view" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -298,11 +308,6 @@
             <option name="WATCH_EXIT" value="false" />
           </properties>
           <option name="timeStamp" value="6" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/dto/TopicDto.java</url>
-          <line>27</line>
-          <option name="timeStamp" value="11" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

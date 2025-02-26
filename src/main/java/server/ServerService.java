@@ -1,23 +1,18 @@
 package server;
 
-import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import dto.TopicDto;
+import dto.VoteDto;
 import io.netty.channel.ChannelFuture;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.EventLoopGroup;
 import model.Topic;
 import model.Vote;
 
-import java.io.File;
-import java.io.IOException;
-import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
-import util.CommandResolver;
 
 public class ServerService {
     private static Map<String, Map<String, Map<String, String>>> data;
@@ -33,8 +28,8 @@ public class ServerService {
 
         topic.setVotes(List.of(
                 new Vote("vote1", "gagdsdfgd", 31, List.of("Sf", "ASf", "FE")),
-                new Vote("vote1", "gagdsdfgd", 31, List.of("Sf", "ASf", "FE")),
-                new Vote("vote1", "gagdsdfgd", 31, List.of("Sf", "ASf", "FE"))
+                new Vote("vote2", "gagdsdfgd", 31, List.of("Sf", "ASf", "FE")),
+                new Vote("vote3", "gagdsdfgd", 31, List.of("Sf", "ASf", "FE"))
 
         ));
 
@@ -53,11 +48,10 @@ public class ServerService {
 
         switch (topicDto.getCallingCmd()) {
             case "view":
-                if (!topics.containsKey(topicDto.getName())) {
-                    System.out.println("topic " + topicDto.getName() + " doesn't exist");
+                if (!topics.containsKey(topicDto.getTopicName())) {
+                    System.out.println("topic " + topicDto.getTopicName() + " doesn't exist");
                 } else {
-                    response = TopicDto.ModelToDto(topics.get(topicDto.getName()));
-                    System.out.println("Topic" + response.getName() + " sent");
+                    response = TopicDto.ModelToDto(topics.get(topicDto.getTopicName()));
                 }
                 break;
             default:
@@ -65,6 +59,7 @@ public class ServerService {
         }
 
         ctx.writeAndFlush(response);
+        System.out.println("Topic" + response.getTopicName() + " sent");
     }
 
     /**
