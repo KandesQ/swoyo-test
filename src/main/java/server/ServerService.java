@@ -52,39 +52,6 @@ public class ServerService {
         System.out.println("Topic" + response.getTopicName() + " sent");
     }
 
-    /**
-     * Изменяет/Добавляет топик в data
-     */
-    public static void update(TopicDto topicDto) {
-//        Topic topic = TopicDto.DtoToModel(topicDto);
-//
-//        // voteName, voteInfo
-//        Map<String, Map<String, String>> voteMap = new HashMap<>();
-//
-//        for (var vote: topic.getVotes()) {
-//            // voteFieldName, voteFieldAttribute
-//            Map<String, String> voteInfo = new HashMap<>();
-//
-//            for (var voteField: vote.getClass().getFields()) {
-//                voteField.setAccessible(true);
-//
-//                // не берем имя тк это ключ
-//                if (voteField.getName().equalsIgnoreCase(vote.getName())) continue;
-//
-//                try {
-//                    voteInfo.put(voteField.getName(), String.valueOf(voteField.get(vote)));
-//                } catch (IllegalAccessException e) {
-//                    System.out.println("Couldn't access to field " + voteField.getName() + ": " + e.getMessage());
-//                }
-//            }
-//
-//            // topicName, voteMap
-//            voteMap.put(vote.getName(), voteInfo);
-//        }
-//
-//        data.put(topic.getName(), voteMap);
-    }
-
     public void exit(ChannelFuture future, List<EventLoopGroup> groups) throws InterruptedException {
         // cначала сохраняем данные
         save("data.json");
