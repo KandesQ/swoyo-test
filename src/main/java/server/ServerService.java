@@ -94,13 +94,21 @@ public class ServerService {
                     }
                 }
                 break;
-//            case "":
+            case "create vote":
+                if (!topics.containsKey(topicDto.getTopicName())) {
+                    response = new TopicDto();
+                } else {
+                    // мок: голосование создано
+                    response = topicDto;
+                }
+
+                break;
             default:
                 System.out.println("couldn't proccess command " + topicDto.getCallingCmd());
         }
 
         ctx.writeAndFlush(response);
-        System.out.println("Topic" + response.getTopicName() + " sent");
+        System.out.println("Topic " + response.getTopicName() + " sent");
     }
 
     public void exit(ChannelFuture future, List<EventLoopGroup> groups) throws InterruptedException {

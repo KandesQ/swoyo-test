@@ -15,6 +15,7 @@ import java.util.Scanner;
 
 public class Client {
 
+    public static final Scanner scanner = new Scanner(System.in);
     private final ClientService clientService;
     private final CommandResolver commandResolver;
     public static final ClientHandler clientHandler = new ClientHandler();
@@ -51,7 +52,7 @@ public class Client {
             channel = f.channel();
 
             // логика ввода пользователем команд
-            try (Scanner scanner = new Scanner(System.in);) {
+            try (scanner) {
 
 
 //                do {

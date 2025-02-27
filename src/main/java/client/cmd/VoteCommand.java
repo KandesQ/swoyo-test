@@ -38,17 +38,15 @@ public class VoteCommand implements Runnable {
                 topicResponseDto = topicDtoOpt.get();
 
                 // с моканьем
-                try (Scanner scanner = new Scanner(System.in)) {
-                    System.out.println("option 1");
-                    System.out.println("option 2");
-                    System.out.println("option 3");
+                System.out.println("option 1");
+                System.out.println("option 2");
+                System.out.println("option 3");
 
 
-                    System.out.println("What option will you choose?: ");
-                    String option = scanner.nextLine();
+                System.out.println("What option will you choose?: ");
+                String option = Client.scanner.nextLine();
 
-                    System.out.println("You chose " + option + "\nAnswer is written");
-                }
+                System.out.println("You chose " + option + "\nAnswer is written");
 
 //                     если бы было без мока
 //                 if (topicResponseDto.getCallingCmd().equals("vote")) {
