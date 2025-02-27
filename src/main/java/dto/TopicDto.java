@@ -5,12 +5,13 @@ import model.Topic;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class TopicDto implements Serializable {
     private static final long serialVersionUID = 1L;
 
-    private String topicName;
-    private String voteName;
+    private String topicName = "";
+    private String voteName = "";
 
     private List<VoteDto> voteDtos = new ArrayList<>();
 
@@ -69,5 +70,27 @@ public class TopicDto implements Serializable {
 
     public void setVoteName(String voteName) {
         this.voteName = voteName;
+    }
+
+    @Override
+    public String toString() {
+        return "TopicDto{" +
+                "topicName='" + topicName + '\'' +
+                ", voteName='" + voteName + '\'' +
+                ", voteDtos=" + voteDtos +
+                ", callingCmd='" + callingCmd + '\'' +
+                '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) return false;
+        TopicDto topicDto = (TopicDto) o;
+        return Objects.equals(callingCmd, topicDto.callingCmd);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(callingCmd);
     }
 }

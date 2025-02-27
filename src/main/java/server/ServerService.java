@@ -61,7 +61,7 @@ public class ServerService {
                             .filter(vote -> vote.getName().equals(topicDto.getVoteName()))
                             .findFirst();
 
-                    Vote deletableVote = null;
+                    Vote deletableVote;
                     if (deletableVoteOpt.isPresent()) {
                         deletableVote = deletableVoteOpt.get();
                         topics.get(topicDto.getTopicName()).getVotes().remove(deletableVote);

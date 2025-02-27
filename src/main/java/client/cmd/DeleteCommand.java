@@ -22,6 +22,7 @@ public class DeleteCommand implements Runnable {
 
         requestDto.setCallingCmd(CommandResolver.getCommandName(CreateTopicCommand.class));
         requestDto.setTopicName(topicName);
+        requestDto.setVoteName(voteName);
 
         Client.channel.writeAndFlush(requestDto);
 
@@ -33,10 +34,11 @@ public class DeleteCommand implements Runnable {
                 topicResponseDto = topicDtoOpt.get();
             }
 
-            if (topicResponseDto != null) {
-                System.out.println("Topic was deleted: " + topicResponseDto.getTopicName());
+            // 1 - есть истекло время ожидания, 2 - если сервер не нашел такого топика или такого голосования, 3 - если нашел и удалил
+            if (topicResponseDto != null && topicResponseDto.getCallingCmd().equals("delete") && topicResponseDto.getVoteName().equals(voteName)) {
+                System.out.println("Vote " + voteName + " of topic: " + topicName + " was deleted");
             } else {
-                System.out.println("Topic " + topicName + " was not deleted");
+                System.out.println("Vote " + voteName + " was not deleted");
             }
 
         } catch (InterruptedException e) {
