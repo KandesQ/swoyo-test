@@ -55,6 +55,24 @@ public class ServerService {
                     response = new TopicDto();
                 }
                 break;
+            case "delete":
+                if (topics.containsKey(topicDto.getTopicName())) {
+                    Optional<Vote> deletableVoteOpt = topics.get(topicDto.getTopicName()).getVotes().stream()
+                            .filter(vote -> vote.getName().equals(topicDto.getVoteName()))
+                            .findFirst();
+
+                    Vote deletableVote = null;
+                    if (deletableVoteOpt.isPresent()) {
+                        deletableVote = deletableVoteOpt.get();
+                        topics.get(topicDto.getTopicName()).getVotes().remove(deletableVote);
+                        response = topicDto;
+                    } else {
+                        response = new TopicDto();
+                    }
+
+                } else {
+                    response = new TopicDto();
+                }
             default:
                 System.out.println("couldn't proccess command " + topicDto.getCallingCmd());
         }
