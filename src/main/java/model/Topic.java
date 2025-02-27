@@ -1,13 +1,14 @@
 package model;
 
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
 public class Topic {
 
     private String name;
-    private List<Vote> votes;
+    private List<Vote> votes = new ArrayList<>();
 
     public Topic() {}
 

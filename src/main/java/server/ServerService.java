@@ -44,6 +44,17 @@ public class ServerService {
                     response = TopicDto.ModelToDto(topics.get(topicDto.getTopicName()));
                 }
                 break;
+            case "create topic":
+                if (!topics.containsKey(topicDto.getTopicName())) {
+                    Topic topic = TopicDto.DtoToModel(topicDto);
+
+                    topics.put(topic.getName(), topic);
+
+                    response = topicDto;
+                } else {
+                    response = new TopicDto();
+                }
+                break;
             default:
                 System.out.println("couldn't proccess command " + topicDto.getCallingCmd());
         }

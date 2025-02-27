@@ -53,8 +53,6 @@ public class Client {
             // логика ввода пользователем команд
             try (Scanner scanner = new Scanner(System.in);) {
 
-                String[] parsedCmd;
-                String[] cmdArgs;
 
 //                do {
 //                    System.out.println("Before using app, please, log in:");
@@ -70,22 +68,33 @@ public class Client {
                 while (true) {
                     System.out.print(">>> ");
 
-                    parsedCmd = scanner.nextLine().split(" ");
-                    cmdArgs = Arrays.copyOfRange(parsedCmd, 1, parsedCmd.length);
+                    String[] cmdArgs = null;
+                    String fullCmd = scanner.nextLine().trim();
+                    String cmdName;
+
+                    // если не нашелся дэш, значит нету аргументов и пришла только команда
+                    if (fullCmd.contains("-")) {
+                        // для составных простых команд (create topic, view) команд нужно все то индекса дэша
+                        // -1 тк надо еще не включительно пробел после команды
+                        cmdName = fullCmd.substring(0, fullCmd.indexOf("-") - 1).trim();
+                        cmdArgs = fullCmd.substring(fullCmd.indexOf("-")).trim().split(" ");
+                    } else {
+                        cmdName = fullCmd;
+                    }
+
+
 
                     try {
-                        // еще подумать над этим ифом, можно ли как нибудь сделать необязательне аргументы (пригодится для команд типа view)
-                        // для команд без аргументов
-                        if (parsedCmd.length == 1) {
-                            commandResolver.getCommandLine(parsedCmd[0]).execute();
+                        // для команд с аргументами и без
+                        if (cmdArgs == null) {
+                            commandResolver.getCommandLine(cmdName).execute();
                         } else {
-                            // если аргументов нет, то picocli не будет ругаться, если они необязательны
-                            commandResolver.getCommandLine(parsedCmd[0]).execute(cmdArgs);
+                            commandResolver.getCommandLine(cmdName).execute(cmdArgs);
                         }
 
-                        if (parsedCmd[0].equalsIgnoreCase("exit")) break;
+                        if (cmdName.equalsIgnoreCase("exit")) break;
                     } catch (Exception e) {
-                        System.out.println("Error while executing " + parsedCmd[0] + " occured: " + e.getMessage());
+                        System.out.println("Error while executing " + cmdName + " occured: " + e.getMessage());
                     }
                 }
             }

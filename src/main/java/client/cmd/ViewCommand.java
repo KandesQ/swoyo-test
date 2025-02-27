@@ -35,12 +35,12 @@ public class ViewCommand implements Runnable {
 
         try {
             Optional<TopicDto> topicDtoOpt = Client.clientHandler.waitResponse(10, TimeUnit.SECONDS);
-            TopicDto topicDto;
+            TopicDto topicResponseDto;
 
             if (topicDtoOpt.isPresent()) {
-                topicDto = topicDtoOpt.get();
+                topicResponseDto = topicDtoOpt.get();
 
-                Topic topic = TopicDto.DtoToModel(topicDto);
+                Topic topic = TopicDto.DtoToModel(topicResponseDto);
 
                 if (voteName != null) {
                     Vote vote = topic.getVotes().stream()

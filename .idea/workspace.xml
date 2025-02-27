@@ -6,6 +6,13 @@
   <component name="ChangeListManager">
     <list default="true" id="805140ed-d048-4aa7-a355-7b30214c672f" name="Changes" comment="refactor load and save">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/client/Client.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/client/Client.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/client/cmd/CreateTopicCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/client/cmd/CreateTopicCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/client/cmd/ViewCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/client/cmd/ViewCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/dto/TopicDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dto/TopicDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/dto/VoteDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dto/VoteDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/Topic.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/Topic.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/server/ServerService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/server/ServerService.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

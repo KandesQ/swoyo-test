@@ -3,15 +3,16 @@ package dto;
 import model.Vote;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 public class VoteDto implements Serializable {
     private static final long serialVersionUID = 1L;
 
     private String name;
-    private String voteDescription;
+    private String voteDescription = "";
     private int optionAmount;
-    private List<String> options; // immutable list
+    private List<String> options = new ArrayList<>();
 
     public static Vote DtoToModel(VoteDto voteDto) {
         Vote vote = new Vote();

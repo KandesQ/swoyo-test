@@ -3,6 +3,7 @@ package dto;
 import model.Topic;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 public class TopicDto implements Serializable {
@@ -11,7 +12,7 @@ public class TopicDto implements Serializable {
     private String topicName;
     private String voteName;
 
-    private List<VoteDto> voteDtos;
+    private List<VoteDto> voteDtos = new ArrayList<>();
 
     private String callingCmd;
 
