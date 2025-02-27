@@ -4,10 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="805140ed-d048-4aa7-a355-7b30214c672f" name="Changes" comment="add delete cmd">
+    <list default="true" id="805140ed-d048-4aa7-a355-7b30214c672f" name="Changes" comment="fix delete cmd">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/client/cmd/DeleteCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/client/cmd/DeleteCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/dto/TopicDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dto/TopicDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/client/cmd/VoteCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/client/cmd/VoteCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/dto/VoteDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dto/VoteDto.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/server/ServerService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/server/ServerService.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -286,7 +287,15 @@
       <option name="project" value="LOCAL" />
       <updated>1740640894860</updated>
     </task>
-    <option name="localTasksCounter" value="19" />
+    <task id="LOCAL-00019" summary="fix delete cmd">
+      <option name="closed" value="true" />
+      <created>1740641865718</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1740641865718</updated>
+    </task>
+    <option name="localTasksCounter" value="20" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -322,7 +331,8 @@
     <MESSAGE value="update view 2.0" />
     <MESSAGE value="create topicCmd" />
     <MESSAGE value="add delete cmd" />
-    <option name="LAST_COMMIT_MESSAGE" value="add delete cmd" />
+    <MESSAGE value="fix delete cmd" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix delete cmd" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

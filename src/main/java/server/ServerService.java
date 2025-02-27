@@ -31,6 +31,12 @@ public class ServerService {
 
     /**
      * Определяет какую логику вызвать, исходя из команды
+     *
+     * Реализовал заглушки для ответа клиенту:
+     * - Если ошибка: что то не найдено или ошибка в действиях, то возвращается пустое Dto
+     * - Все хорошо: возвращается dto которое пришло
+     *
+     * Клиент смотрит, что вернулось дто, у которой та же команда и все гуд
      */
     public void resolveAndFlush(ChannelHandlerContext ctx, TopicDto topicDto) {
         TopicDto response = new TopicDto();
@@ -73,6 +79,22 @@ public class ServerService {
                 } else {
                     response = new TopicDto();
                 }
+            case "vote":
+                if (!topics.containsKey(topicDto.getTopicName())) {
+                    response = new TopicDto();
+                } else {
+                    Optional<Vote> voteOpt = topics.get(topicDto.getTopicName()).getVotes().stream()
+                            .filter(vote -> vote.getName().equals(topicDto.getVoteName()))
+                            .findFirst();
+
+                    if (voteOpt.isPresent()) {
+                        response = topicDto;
+                    } else {
+                        response = new TopicDto();
+                    }
+                }
+                break;
+//            case "":
             default:
                 System.out.println("couldn't proccess command " + topicDto.getCallingCmd());
         }
@@ -193,12 +215,12 @@ public class ServerService {
         Map<String, Map<String, Map<String, String>>> data = new HashMap<>(); // HashMap потому что с многопотоком уже не работает
 
 
-        for (Topic topic: topics.values()) {
+        for (Topic topic : topics.values()) {
             Map<String, Map<String, String>> voteMap = new HashMap<>();
-            for (Vote vote: topic.getVotes()) {
+            for (Vote vote : topic.getVotes()) {
                 Map<String, String> voteInfo = new HashMap<>();
 
-                for (Field voteField: vote.getClass().getDeclaredFields()) {
+                for (Field voteField : vote.getClass().getDeclaredFields()) {
                     voteField.setAccessible(true);
                     try {
                         voteInfo.put(voteField.getName(), String.valueOf(voteField.get(vote)));

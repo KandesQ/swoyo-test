@@ -18,7 +18,7 @@ public class CommandResolver {
         commands.put(getCommandName(CreateTopicCommand.class), new CreateTopicCommand());
 //        commands.put(getCommandName(CreateVoteCommand.class), new CreateVoteCommand());
         commands.put(getCommandName(DeleteCommand.class), new DeleteCommand());
-//        commands.put(getCommandName(VoteCommand.class), new VoteCommand());
+        commands.put(getCommandName(VoteCommand.class), new VoteCommand());
     }
 
     /**

@@ -5,6 +5,7 @@ import model.Vote;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class VoteDto implements Serializable {
     private static final long serialVersionUID = 1L;
@@ -68,4 +69,15 @@ public class VoteDto implements Serializable {
         this.options = options;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) return false;
+        VoteDto voteDto = (VoteDto) o;
+        return Objects.equals(name, voteDto.name);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(name);
+    }
 }
